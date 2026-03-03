@@ -1,0 +1,202 @@
+{
+  "info": {
+    "_postman_id": "6d15fc86-8b05-49a3-b8c1-a5ef4c8d4c6b",
+    "name": "My Collection",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52838464",
+    "_collection_link": "https://go.postman.co/collection/52838464-6d15fc86-8b05-49a3-b8c1-a5ef4c8d4c6b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "ConsultasTallerAvanzada",
+      "item": [
+        {
+          "name": "Crear desarrolladora",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombre\": \"Capcom\",\r\n  \"pais\": \"Japón\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/desarrolladora",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "desarrolladora"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Desarrolladoras",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombre\": \"Nintendo\",\r\n  \"pais\": \"Japón\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/desarrolladora",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "desarrolladora"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear videojuego",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"titulo\": \"Carlos duty\",\r\n  \"precio\": 100000,\r\n  \"codigoRegistro\": \"CAL002\",\r\n  \"genero\": \"ACCION\",\r\n  \"desarrolladora\": {\r\n    \"id\": 2\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/videojuegos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "videojuegos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Videojuegos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/videojuegos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "videojuegos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/videojuegos/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "videojuegos",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar por ID",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"titulo\": \"Zelda Tears of the Kingdom\",\r\n  \"precio\": 250000,\r\n  \"codigoRegistro\": \"ZEL002\",\r\n  \"genero\": \"OTROS\",\r\n  \"desarrolladora\": {\r\n    \"id\": 1\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/videojuegos/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "videojuegos",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar por ID",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/videojuegos/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "videojuegos",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Videojuegos en rango",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

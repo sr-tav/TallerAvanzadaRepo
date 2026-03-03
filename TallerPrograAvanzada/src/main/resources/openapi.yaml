@@ -1,0 +1,229 @@
+openapi: 3.0.0
+info:
+  title: API de gestion de GameStore
+  description: Sistema de gestion de GameStore, manejo de desarrolladoras y videojuegos
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api
+tags:
+  - name: Solicitudes
+components:
+  schemas:
+    Genero:
+      type: string
+      enum: [ ACCION, ESTRATEGIA, RPG, DEPORTES, OTROS ]
+    Desarrolladora:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+        sitioWeb:
+          type: string
+        videojuegos:
+          type: array
+          items:
+            $ref: '#/components/schemas/VideoJuego'
+    VideoJuego:
+      type: object
+      properties:
+        id:
+          type: integer
+        titulo:
+          type: string
+        precio:
+          type: number
+          format: double
+        codigoRegistro:
+          type: string
+        genero:
+          $ref: '#/components/schemas/Genero'
+        desarrolladora:
+          $ref: '#/components/schemas/Desarrolladora'
+        fechaCreacion:
+          type: string
+          format: date-time
+        fechaActualizacion:
+          type: string
+          format: date-time
+        precioConIva:
+          type: number
+          format: double
+          readOnly: true
+          description: Precio calculado con IVA incluido
+paths:
+  /desarolladoras:
+    post:
+      summary: Crear una nueva desarrolladora
+      operationId: createDesarrolladora
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Desarrolladora'
+      responses:
+        '201':
+          description: Desarrolladora creada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Desarrolladora'
+    get:
+      summary: listar todas las desarrolladoras
+      responses:
+        '200':
+          description: Lista de Desarrolladoras
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Desarrolladora'
+  /videojuegos:
+    get:
+       summary: listar todos los juegos
+       responses:
+         '200':
+           description: Lista de VideoJuegos
+           content:
+             application/json:
+               schema:
+                 type: array
+                 items:
+                   $ref: '#/components/schemas/VideoJuego'
+    post:
+        summary: crear un videojuego
+        operationId: createVideoJuego
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoJuego'
+        responses:
+          '201':
+            description: VideoJuego creado
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/VideoJuego'
+  /videojuegos/{id}:
+    get:
+       summary: obtener videojuego por id
+       parameters:
+         - name: id
+           in: path
+           required: true
+           schema:
+             type: string
+       responses:
+         '200':
+           description: Juego encontrado
+           content:
+             application/json:
+               schema:
+                 $ref: '#/components/schemas/VideoJuego'
+    put:
+      summary: actualizar un juego completo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Juego actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoJuego'
+        '404':
+          description: Videojuego no encontrado
+        '400':
+          description: Datos inválidos
+    delete:
+      summary: eliminar un videojuego
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Videojuego eliminado
+        '404':
+          description: Videojuego no encontrado
+        '400':
+          description: Datos inválidos
+  /videojuegos/{titulo}:
+    get:
+      summary: buscar videojuego por titulo
+      parameters:
+        - name: titulo
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Videojuego encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoJuego'
+        '404':
+          description: Videojuego no encontrado
+        '400':
+          description: Datos inválidos
+  /videojuegos/{min}/{max}:
+    get:
+      summary: buscar videojuego por rango de precio
+      parameters:
+        - name: min
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: max
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Videojuegos en el rango de precios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VideoJuego'
+        '404':
+          description: Videojuego no encontrado
+        '400':
+          description: Datos inválidos
+  /videojuegos/{id}/{valor}:
+    patch:
+      summary: aplicar un descuento a un juego en especifico
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: valor
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: descuento aplicado con exito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoJuego'
